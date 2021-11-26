@@ -1,0 +1,121 @@
+﻿@model IEnumerable<AcmeIncWeb.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+    <link rel="stylesheet" href="~/css/buttons.css" />
+}
+
+
+<style>
+
+    .sidebar {
+        height: max-content;
+        position: fixed;
+        left: 0;
+        margin-top: 3%;
+        width: 250px;
+        background: #266470;
+    }
+
+        .sidebar header {
+            font-size: 22px;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            background: #58B4C6;
+            user-select: none;
+        }
+        .sidebar ul {
+            list-style: none;
+        }
+
+            .sidebar ul a {
+                display: block;
+                height: 100%;
+                width: 100%;
+                line-height: 40px;
+                font-size: 15px;
+                color: white;
+                padding-left: 15px;
+                box-sizing: border-box;
+                border-top: 1px solid rgba(255,255,255,.1);
+                border-bottom: 1px #D9D9D9;
+            }
+
+    ul li:hover a {
+        padding-left: 10px;
+    }
+</style>
+
+<div class="sidebar">
+
+
+    <header>Categories</header>
+    <ul>
+
+        <li>@Html.ActionLink("All Products", "Index")</li>
+        @foreach (Category item in ViewBag.Categories)
+        {
+            String id = "0" + item.CatId;
+            <li>@Html.ActionLink(item.Type, "Index", new { searchTerm = id })</li>
+        }
+    </ul>
+</div>
+
+
+
+<div style="margin-left:10%">
+
+    <br>
+
+            @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+            {
+                <p style="font-family:Segoe UI">
+                    Enter product name or description:  @Html.TextBox("searchTerm")
+                    <input type="submit" value="Search" class="gradient-button gradient-button-4"  />
+
+                </p>
+
+                <p style="font-family:Segoe UI; color:red">@ViewData["Error"]</p>
+            }
+   
+    <br>
+
+    <div class="card-deck  justify-content-center " style="align-content:center">
+
+        @foreach (var item in Model)
+        {
+            <div>
+
+                <div class="card border-info m-3 align-content-center" style="width:220px; ">
+                    <div class=" card-header text-center" style="height: 75px; background-color: #cae7ed">
+
+                        @Html.DisplayFor(model => item.Name)
+                    </div>
+
+                    <div class="card-body" style="text-align:Left ; padding-bottom:20px ; color: blue">
+                        <div style="height: 100px">
+
+                            <center>
+                                <img src="@item.ImageUrl" style="width:auto; height:110px; max-width:170px" />
+
+                            </center>
+
+                        </div>
+                        <br>
+
+
+                        <div style="text-align: Left; color:black">R @item.Sell </div>
+                        <br>
+                        <a asp-action="Details" asp-controller="Product" asp-route-id=@item.ProdId> More details </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

@@ -1,0 +1,54 @@
+﻿@model AcmeIncWeb.Models.Cart
+
+@{
+    ViewData["Title"] = "Cart Details";
+    <link rel="stylesheet" href="~/css/buttons.css" />
+}
+
+@{
+
+    if (!(Model == null))
+    {
+
+        <div class="card border-info mb-3">
+            <h3 class="card-header">Your Cart</h3>
+            <div class="card-body">
+                <h5 class="card-title">@Model.Prod.Name</h5>
+                <h6 class="card-subtitle text-muted">Qty: 1</h6>
+            </div>
+
+            <div>
+                <center>
+                    <img src="@Model.Prod.ImageUrl" style=" height:auto; width:150px" />
+                </center>
+            </div>
+
+            <div class="card-body">
+                <p class="card-text">@Model.Prod.Description</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">@Model.Prod.Cat</li>
+            </ul>
+            <div class="card-body">
+                <a class="gradient-button gradient-button-4" asp-action="CheckOut" asp-controller="Product">Check Out</a>
+            </div>
+            <div class="card-footer text-muted">
+                ACME INC
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>You have no items in your cart.</p>
+    }
+
+}
+
+
+
+
+
+
+
+
+

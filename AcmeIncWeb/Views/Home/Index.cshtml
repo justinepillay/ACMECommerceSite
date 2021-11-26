@@ -1,0 +1,16 @@
+﻿
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <link href="~/css/buttons.css" rel="stylesheet" />
+    <link href="~/css/Home.css" rel="stylesheet" />
+}
+
+
+<div style="float:left; margin-top:15%">
+
+    <h3 style="font-family:'Century Gothic'"> Welcome to ACME!</h3>
+    <p>We are a growing e-commerce store catering for all.</p>
+    <p>Click the button below to start browsing through our catelog!</p>
+    <a class="gradient-button gradient-button-4" style="width:150px" asp-action="Index"  asp-controller="Product" >Catalog</a>
+</div>
